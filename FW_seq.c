@@ -9,17 +9,13 @@
  * Program Description: This program implements a sequential (CPU) version of the algorithm.
  */
 
-/*
- *  Compile with:
- *              gcc -o FW_seq FW_seq.c
-*/
-
-
+#include <ctype.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-#include <limits.h>
+#include <time.h>
+
 
 #define MAX_GRAPH 397020
 #define MAX_BUF 1000 // integer size of buffer for file reading
@@ -29,8 +25,9 @@
 // Forward declarations
 unsigned int convert(char *st);
 void read_input(const char *fn, int *adj_matrix, unsigned int N);
+void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N);
 void print_adj(int *adj_matrix, unsigned int N);
-void FW(int *adj_matrix, int *go_to, unsigned int N);
+void FW_sequential(int *adj_matrix, int *go_to, unsigned int N);
 void print_path(int *adj_matrix, int *go_to, unsigned int N);
 void print_path_recursive(int *go_to, unsigned int i, unsigned int j, unsigned int N);
 /*****************************************************************/
@@ -62,7 +59,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    // Allocate memory for go_to matrix:
+    // Allocate memory for NxN go_to matrix:
     int *go_to;
     go_to = (int *) malloc(sizeof(int) * N * N);
     if (go_to == NULL) {
@@ -72,30 +69,32 @@ int main(int argc, char *argv[])
 
     // Read input and populate edges
     read_input(input_file_name, adj_matrix, N);
-    // Pre-process adjacency matrix: Fill non-edges with int max / 2
-    for (unsigned int i = 0; i < N; i++) {
-        for (unsigned int j = 0; j < N; j++) {
-            if (adj_matrix[index(i, j, N)] >= 1) {
-                go_to[index(i, j, N)] = j;
-            }
-            else {
-                adj_matrix[index(i, j, N)] = INT_MAX / 2;
-                go_to[index(i, j, N)] = -1;
-            }
-        }
-    }
+
+    // Pre-process adjacency matrix and next index matrix
+    preprocess_graph(adj_matrix, go_to, N);
     print_adj(adj_matrix, N);
 
-    // Run FW algorithm on adjacency matrix
-    FW(adj_matrix, go_to, N);
+    // Run FW algorithm on adjacency matrix (and measure time)
+    double time_taken;
+    clock_t clock_start, clock_end;
+    clock_start = clock();
+    FW_sequential(adj_matrix, go_to, N);
+    clock_end = clock();
+    time_taken = ((double) clock_end - clock_start) / CLOCKS_PER_SEC;
+    printf("Time taken to run FW algorithm: %lf seconds\n", time_taken);
+
+    // Print solution path between every pair of vertices
     print_path(adj_matrix, go_to, N);
+
+    free(adj_matrix);
+    free(go_to);
     return 0;
 }
 
-/*
+/*******************************************************************************************************************
  * Convert command line input to integer
  * Code taken from https://stackoverflow.com/questions/34206446/how-to-convert-string-into-unsigned-int-c
- */
+ *******************************************************************************************************************/
 unsigned int convert(char *st) {
     char *x;
     for (x = st ; *x ; x++) {
@@ -105,9 +104,9 @@ unsigned int convert(char *st) {
     return (strtoul(st, 0L, 10));
 }
 
-/*
+/*******************************************************************************************************************
  * Read input graph file and populate adjacency matrix
- */
+ *******************************************************************************************************************/
 void read_input(const char *fn, int *adj_matrix, unsigned int N) {
     const char *fileName = fn;
     FILE *input = fopen(fileName, "r");
@@ -142,9 +141,28 @@ void read_input(const char *fn, int *adj_matrix, unsigned int N) {
     fclose(input);
 }
 
-/*
+/*******************************************************************************************************************
+ * Pre-process adjacency matrix and next index matrix:
+ * Fill non-edges with int_max/2 in adjacency matrix and -1 in next index on path matrix
+ *******************************************************************************************************************/
+void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
+    for (unsigned int i = 0; i < N; i++) {
+        for (unsigned int j = 0; j < N; j++) {
+            if (adj_matrix[index(i, j, N)] >= 1) {
+                go_to[index(i, j, N)] = j;
+            }
+            else {
+                adj_matrix[index(i, j, N)] = INT_MAX / 2;
+                go_to[index(i, j, N)] = -1;
+            }
+        }
+    }
+}
+
+
+/*******************************************************************************************************************
  * Print adjacency matrix read in from file
- */
+ *******************************************************************************************************************/
 void print_adj(int *adj_matrix, unsigned int N) {
     printf("Original adjacency matrix:\n");
     printf("    |");
@@ -160,11 +178,10 @@ void print_adj(int *adj_matrix, unsigned int N) {
     }
 }
 
-/*
- * Floyd-Warshall algorithm to solve APSP closure
- * return: closure matrix containing 1 if path exists between any two vertices i, j and 0 otherwise
- */
-void FW(int *adj_matrix, int *go_to, unsigned int N) {
+/*******************************************************************************************************************
+ * Floyd-Warshall algorithm to solve APSP problem (sequentially)
+ *******************************************************************************************************************/
+void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
     for (unsigned int k = 0; k < N; k++) {
         for (unsigned int i = 0; i < N; i++) {
             for (unsigned int j = 0; j < N; j++) {
@@ -177,9 +194,9 @@ void FW(int *adj_matrix, int *go_to, unsigned int N) {
     }
 }
 
-/*
+/*******************************************************************************************************************
  * Print path between all vertex pairs i,j
- */
+ *******************************************************************************************************************/
 void print_path(int *adj_matrix, int *go_to, unsigned int N) {
     printf("\nAPSP solution:\n");
     for (unsigned int i = 0; i < N; i++) {
@@ -196,9 +213,9 @@ void print_path(int *adj_matrix, int *go_to, unsigned int N) {
     }
 }
 
-/*
+/*******************************************************************************************************************
  * Recursive method for printing path
- */
+ *******************************************************************************************************************/
 void print_path_recursive(int *go_to, unsigned int i, unsigned int j, unsigned int N) {
     unsigned int next = go_to[index(i, j, N)];
     if (next == j) {
