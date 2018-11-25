@@ -126,7 +126,8 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
     dim3 dimBlock(warp_size, warp_size);
 
     // Run FW triple-loop by launching a new kernel for each k
-    for (unsigned int k = 0; k < N; k++) {
+    unsigned int k;
+    for (k = 0; k < N; k++) {
         FW_kernel<<dimGrid, dimBlock>>(adj_matrix_d, go_to_d, N, (int) k);
         err = cudaGetLastError();
         CUDA_ERROR_CHECK(err);

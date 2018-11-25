@@ -146,8 +146,9 @@ void read_input(const char *fn, int *adj_matrix, unsigned int N) {
  * Fill non-edges with int_max/2 in adjacency matrix and -1 in next index on path matrix
  *******************************************************************************************************************/
 void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
-    for (unsigned int i = 0; i < N; i++) {
-        for (unsigned int j = 0; j < N; j++) {
+    unsigned int i, j;
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
             if (adj_matrix[index(i, j, N)] >= 1) {
                 go_to[index(i, j, N)] = j;
             }
@@ -164,13 +165,14 @@ void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
  * Print adjacency matrix read in from file
  *******************************************************************************************************************/
 void print_adj(int *adj_matrix, unsigned int N) {
+    unsigned int i, j;
     printf("Original adjacency matrix:\n");
     printf("    |");
-    for (unsigned int i = 0; i < N; i++) printf(" %2d |", i+1);
+    for (i = 0; i < N; i++) printf(" %2d |", i+1);
     printf("\n----|----|----|----|----|----|----|----|----|----|----|\n");
-    for (unsigned int i = 0; i < N; i++) {
+    for (i = 0; i < N; i++) {
         printf(" %2d |", i+1);
-        for (unsigned int j = 0; j < N; j++) {
+        for (j = 0; j < N; j++) {
             if (adj_matrix[index(i, j, N)] != INT_MAX/2) printf(" %2d |", adj_matrix[index(i, j, N)]);
             else printf("  - |");
         }
@@ -182,9 +184,10 @@ void print_adj(int *adj_matrix, unsigned int N) {
  * Floyd-Warshall algorithm to solve APSP problem (sequentially)
  *******************************************************************************************************************/
 void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
-    for (unsigned int k = 0; k < N; k++) {
-        for (unsigned int i = 0; i < N; i++) {
-            for (unsigned int j = 0; j < N; j++) {
+    unsigned int i, j, k;
+    for (k = 0; k < N; k++) {
+        for (i = 0; i < N; i++) {
+            for (j = 0; j < N; j++) {
                 if (adj_matrix[index(i, j, N)] > (adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)])) {
                     adj_matrix[index(i, j, N)] = adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)];
                     go_to[index(i, j, N)] = (int) k;
@@ -198,9 +201,10 @@ void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
  * Print path between all vertex pairs i,j
  *******************************************************************************************************************/
 void print_path(int *adj_matrix, int *go_to, unsigned int N) {
+    unsigned int i, j;
     printf("\nAPSP solution:\n");
-    for (unsigned int i = 0; i < N; i++) {
-        for (unsigned int j = 0; j < N; j++) {
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
             if (go_to[index(i, j, N)] == -1) {
                 printf("No path exists between %u and %u.\n", i+1, j+1);
             }
