@@ -10,6 +10,7 @@
 
 #include <ctype.h>
 #include <cuda.h>
+#include <getopt.h>
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
@@ -54,6 +55,8 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "input = file containing adjacency matrix for the graph\n");
         fprintf(stderr, "N = number for vertices from input graph to use\n");
         fprintf(stderr, "who = 0: sequential code on CPU, 1: GPU execution\n");
+        fprintf(stderr, "(optional) -v; verbose = false: if flag is set then original adjacency matrix and APSP "
+                        "solution will be printed.")
         exit(1);
     }
 
@@ -67,7 +70,15 @@ int main(int argc, char *argv[]) {
     }
     int type_of_device = 0; // CPU or GPU
     type_of_device = atoi(argv[3]);
-
+    int c;
+    bool verbose = false;
+    while ((c = getopt(argc, argv, "v:")) != -1) {
+        switch(c) {
+            case 'v':
+                verbose = true; // set verbose printing to true
+                break;
+        }
+    }
     // Allocate memory for NxN adjacency matrix
     int *adj_matrix;
     adj_matrix = (int *) calloc( N * N, sizeof(int));
@@ -89,7 +100,7 @@ int main(int argc, char *argv[]) {
 
     // Pre-process adjacency matrix and next index matrix
     preprocess_graph(adj_matrix, go_to, N);
-    print_adj(adj_matrix, N);
+    if (verbose) print_adj(adj_matrix, N);
 
     // Declare variables for tracking time
     double time_taken;
@@ -112,7 +123,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Print solution path between every pair of vertices
-    print_path(adj_matrix, go_to, N);
+    if (verbose) print_path(adj_matrix, go_to, N);
 
     free(adj_matrix);
     free(go_to);
