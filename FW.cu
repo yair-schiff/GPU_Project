@@ -144,7 +144,7 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
     err = cudaGetDeviceProperties(&dev_prop, 0);
     CUDA_ERROR_CHECK(err);
     int warp_size = dev_prop.warpSize;
-    int dim_helper = ceil(prime_end/((double) warp_size));
+    int dim_helper = ceil(N/((double) warp_size));
     dim3 dimGrid(dim_helper, dim_helper);
     dim3 dimBlock(warp_size, warp_size);
 
