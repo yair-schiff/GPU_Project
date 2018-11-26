@@ -1,10 +1,10 @@
-CC = nvcc
-ARCH=sm_52
-CFLAGS=-Wall -arch=$(ARCH)
+NVCC = nvcc
+ARCH = sm_52
+NVCCFLAGS = -arch=$(ARCH)
 OBJ = FW_helper.c FW.cu
 
 FW: $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(NVCC) $(NVCCFLAGS) -o $@ $^
 
 .PHONY: clean
 
