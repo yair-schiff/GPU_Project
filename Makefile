@@ -1,7 +1,7 @@
 NVCC = nvcc
-ARCH = sm_52
-NVCCFLAGS = -arch=$(ARCH)
-OBJ = FW_helper.c FW.cu
+ARCH = 52
+NVCCFLAGS = -arch=sm_$(ARCH)
+OBJ = FW.cu
 
 FW: $(OBJ)
 	$(NVCC) $(NVCCFLAGS) -o $@ $^
