@@ -35,12 +35,13 @@
 /*****************************************************************
  * Forward declarations
 *****************************************************************/
+char* concat(const char *s1, const char *s2);
 unsigned int convert(char *st);
 void read_input(const char *fn, int *adj_matrix, unsigned int N);
 void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N);
 void print_adj(int *adj_matrix, unsigned int N);
-void print_path(int *adj_matrix, int *go_to, unsigned int N);
-void print_path_recursive(int *go_to, unsigned int i, unsigned int j, unsigned int N);
+void save_path(const char *fn, int *adj_matrix, int *go_to, unsigned int N);
+void save_path_recursive(FILE * f, int *go_to, unsigned int i, unsigned int j, unsigned int N);
 void FW_sequential(int *adj_matrix, int *go_to, unsigned int N);
 void FW_parallel(int *adj_matrix, int *go_to, unsigned int N);
 /*****************************************************************/
@@ -70,7 +71,6 @@ int main(int argc, char *argv[]) {
     }
     int type_of_device = 0; // CPU or GPU
     type_of_device = atoi(argv[3]);
-    int c;
     int verbose = 0;
     verbose = atoi(argv[4]);
 
@@ -91,9 +91,11 @@ int main(int argc, char *argv[]) {
     }
 
     // Read input and populate edges
+    printf("Reading in graph input .txt file...\n");
     read_input(input_file_name, adj_matrix, N);
 
     // Pre-process adjacency matrix and next index matrix
+    printf("Preprocessing adjacency and next index matrices...\n");
     preprocess_graph(adj_matrix, go_to, N);
     if (verbose) print_adj(adj_matrix, N);
 
@@ -103,6 +105,7 @@ int main(int argc, char *argv[]) {
 
     // Dispatch FW to either sequential or parallel version based on flag passed in
     if (!type_of_device) { // The CPU sequential version
+        printf("Running FW algorithm on graph (sequentially)...\n");
         clock_start = clock();
         FW_sequential(adj_matrix, go_to, N);
         clock_end = clock();
@@ -110,6 +113,7 @@ int main(int argc, char *argv[]) {
         printf("Time taken to run FW algorithm sequentially: %lf seconds\n", time_taken);
     }
     else { // The GPU version
+        printf("Running FW algorithm on graph (in parallel)...\n");
         clock_start = clock();
         FW_parallel(adj_matrix, go_to, N);
         clock_end = clock();
@@ -117,8 +121,10 @@ int main(int argc, char *argv[]) {
         printf("Time taken to run FW algorithm in parallel: %lf seconds\n", time_taken);
     }
 
-    // Print solution path between every pair of vertices
-    if (verbose) print_path(adj_matrix, go_to, N);
+    // Save solution path between every pair of vertices to file solution_path_<N>.txt
+    const char *outfile_name = concat(concat("solution_path_", argv[2]), ".txt");
+    printf("Saving solution path to file %s...\n", outfile_name);
+    save_path(outfile_name, adj_matrix, go_to, N);
 
     free(adj_matrix);
     free(go_to);
@@ -203,11 +209,37 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
 }
 
 /*******************************************************************************************************************
+ * Concatenate two strings  
+ *******************************************************************************************************************/
+char* concat(const char *s1, const char *s2) {
+        void *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+            if (!result) {
+                    fprintf(stderr, " Cannot allocate the concatenated string\n");
+                        exit(1);
+                            }
+                strcpy((char *) result, s1);
+                    strcat((char *) result, s2);
+                        return (char *) result;
+}
+
+/*******************************************************************************************************************
+ * Convert command line input to integer
+ * Code taken from https://stackoverflow.com/questions/34206446/how-to-convert-string-into-unsigned-int-c
+ *******************************************************************************************************************/
+unsigned int convert(char *st) {
+    char *x;
+    for (x = st ; *x ; x++) {
+        if (!isdigit(*x))
+            return 0L;
+    }
+    return (strtoul(st, 0L, 10));
+}
+
+/*******************************************************************************************************************
  * Read input graph file and populate adjacency matrix
  *******************************************************************************************************************/
 void read_input(const char *fn, int *adj_matrix, unsigned int N) {
-    const char *fileName = fn;
-    FILE *input = fopen(fileName, "r");
+    FILE *input = fopen(fn, "r");
     if (input == NULL) {
         fprintf(stderr, "Error while opening the file.\n");
         exit(1);
@@ -237,19 +269,6 @@ void read_input(const char *fn, int *adj_matrix, unsigned int N) {
 
     // Close file
     fclose(input);
-}
-
-/*******************************************************************************************************************
- * Convert command line input to integer
- * Code taken from https://stackoverflow.com/questions/34206446/how-to-convert-string-into-unsigned-int-c
- *******************************************************************************************************************/
-unsigned int convert(char *st) {
-    char *x;
-    for (x = st ; *x ; x++) {
-        if (!isdigit(*x))
-            return 0L;
-    }
-    return (strtoul(st, 0L, 10));
 }
 
 /*******************************************************************************************************************
@@ -293,34 +312,41 @@ void print_adj(int *adj_matrix, unsigned int N) {
 /*******************************************************************************************************************
  * Print path between all vertex pairs i,j
  *******************************************************************************************************************/
-void print_path(int *adj_matrix, int *go_to, unsigned int N) {
+void save_path(const char *fn, int *adj_matrix, int *go_to, unsigned int N) {
+    FILE *output = fopen(fn, "w");
+    if (output == NULL) {
+        fprintf(stderr, "Error while opening the file.\n");
+        exit(1);
+    }
     unsigned int i, j;
-    printf("\nAPSP solution:\n");
+    fprintf(output, "APSP solution:\n");
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             if (go_to[index(i, j, N)] == -1) {
-                printf("No path exists between %u and %u.\n", i+1, j+1);
+                fprintf(output, "No path exists between %u and %u.\n", i+1, j+1);
             }
             else {
-                printf("Path from %u to %u (length: %d): %u", i+1, j+1, adj_matrix[index(i, j, N)], i+1);
-                print_path_recursive(go_to, i, j, N);
-                printf("\n");
+                fprintf(output, "Path from %u to %u (length: %d): %u", i+1, j+1, adj_matrix[index(i, j, N)], i+1);
+                save_path_recursive(output, go_to, i, j, N);
+                fprintf(output, "\n");
             }
         }
     }
+    // Close file
+    fclose(output);
 }
 
 /*******************************************************************************************************************
  * Recursive method for printing path
  *******************************************************************************************************************/
-void print_path_recursive(int *go_to, unsigned int i, unsigned int j, unsigned int N) {
+void save_path_recursive(FILE *f, int *go_to, unsigned int i, unsigned int j, unsigned int N) {
     unsigned int next = go_to[index(i, j, N)];
     if (next == j) {
-        printf("->%u", next+1);
+        fprintf(f, "->%u", next+1);
         return;
     }
     else {
-        print_path_recursive(go_to, i, next, N);
-        print_path_recursive(go_to, next, j, N);
+        save_path_recursive(f, go_to, i, next, N);
+        save_path_recursive(f, go_to, next, j, N);
     }
 }
