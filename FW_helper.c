@@ -6,90 +6,8 @@
  * Project Description: This project explores the efficient implementation of the Floyd-Warshall (FW) algorithm, a
  * solution for the All-Pairs-Shortest-Path (APSP) and Transitive Closure problems
  *
- * Program Description: This program implements a sequential (CPU) version of the algorithm.
+ * File Description: This file implements the functions defined in FW_helper.h
  */
-
-#include <ctype.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
-
-#define MAX_GRAPH 397020
-#define MAX_BUF 1000 // integer size of buffer for file reading
-#define index(i, j, N)  ((i)*(N)) + (j) /* To index element (i,j) of a 2D array stored as 1D */
-
-/*****************************************************************/
-// Forward declarations
-unsigned int convert(char *st);
-void read_input(const char *fn, int *adj_matrix, unsigned int N);
-void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N);
-void print_adj(int *adj_matrix, unsigned int N);
-void FW_sequential(int *adj_matrix, int *go_to, unsigned int N);
-void print_path(int *adj_matrix, int *go_to, unsigned int N);
-void print_path_recursive(int *go_to, unsigned int i, unsigned int j, unsigned int N);
-/*****************************************************************/
-
-
-int main(int argc, char *argv[])
-{
-    if (argc != 3) {
-        fprintf(stderr, "usage: FW_seq <input> <N>\n");
-        fprintf(stderr, "input = file containing adjacency matrix for the graph\n");
-        fprintf(stderr, "N = number for vertices from input graph to use\n");
-        exit(1);
-    }
-
-    unsigned int N;  // Number of vertices to use
-    N = convert(argv[2]);
-    if (N > MAX_GRAPH) {
-        fprintf(stderr, "Max graph size allowed %u x %u. Defaulting to this size.", MAX_GRAPH, MAX_GRAPH);
-        N = MAX_GRAPH;
-    }
-
-    const char *input_file_name = argv[1];
-
-    // Allocate memory for NxN adjacency matrix
-    int *adj_matrix;
-    adj_matrix = calloc( N * N, sizeof(int));
-    if (adj_matrix == NULL) {
-        fprintf(stderr, "malloc for adjacency matrix of size %u x %u failed.", N, N);
-        exit(1);
-    }
-
-    // Allocate memory for NxN go_to matrix:
-    int *go_to;
-    go_to = (int *) malloc(sizeof(int) * N * N);
-    if (go_to == NULL) {
-        fprintf(stderr, "malloc for go_to matrix of size %u x %u failed.", N, N);
-        exit(1);
-    }
-
-    // Read input and populate edges
-    read_input(input_file_name, adj_matrix, N);
-
-    // Pre-process adjacency matrix and next index matrix
-    preprocess_graph(adj_matrix, go_to, N);
-    print_adj(adj_matrix, N);
-
-    // Run FW algorithm on adjacency matrix (and measure time)
-    double time_taken;
-    clock_t clock_start, clock_end;
-    clock_start = clock();
-    FW_sequential(adj_matrix, go_to, N);
-    clock_end = clock();
-    time_taken = ((double) clock_end - clock_start) / CLOCKS_PER_SEC;
-    printf("Time taken to run FW algorithm: %lf seconds\n", time_taken);
-
-    // Print solution path between every pair of vertices
-    print_path(adj_matrix, go_to, N);
-
-    free(adj_matrix);
-    free(go_to);
-    return 0;
-}
 
 /*******************************************************************************************************************
  * Convert command line input to integer
@@ -160,7 +78,6 @@ void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
     }
 }
 
-
 /*******************************************************************************************************************
  * Print adjacency matrix read in from file
  *******************************************************************************************************************/
@@ -177,23 +94,6 @@ void print_adj(int *adj_matrix, unsigned int N) {
             else printf("  - |");
         }
         printf("\n----|----|----|----|----|----|----|----|----|----|----|\n");
-    }
-}
-
-/*******************************************************************************************************************
- * Floyd-Warshall algorithm to solve APSP problem (sequentially)
- *******************************************************************************************************************/
-void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
-    unsigned int i, j, k;
-    for (k = 0; k < N; k++) {
-        for (i = 0; i < N; i++) {
-            for (j = 0; j < N; j++) {
-                if (adj_matrix[index(i, j, N)] > (adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)])) {
-                    adj_matrix[index(i, j, N)] = adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)];
-                    go_to[index(i, j, N)] = (int) k;
-                }
-            }
-        }
     }
 }
 
