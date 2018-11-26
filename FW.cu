@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
     // Allocate memory for NxN adjacency matrix
     int *adj_matrix;
-    adj_matrix = calloc( N * N, sizeof(int));
+    adj_matrix = (int *) calloc( N * N, sizeof(int));
     if (adj_matrix == NULL) {
         fprintf(stderr, "malloc for adjacency matrix of size %u x %u failed.", N, N);
         exit(1);
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
     print_path(adj_matrix, go_to, N);
 
     free(adj_matrix);
-    free(go_to)
+    free(go_to);
     return 0;
 }
 
@@ -128,7 +128,8 @@ void FW_kernel(int *adj_matrix, int *go_to, unsigned int N, int k) {
 void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
     // Allocate memory on GPU for NxN adjacency and next index matrices
     int num_bytes = sizeof(int) * N * N;
-    int * adj_matrix_d, go_to_d;
+    int *adj_matrix_d;
+    int *go_to_d;
     cudaError_t err = cudaMalloc((void **) &adj_matrix_d, num_bytes);
     CUDA_ERROR_CHECK(err);
     err = cudaMemcpy(adj_matrix_d, adj_matrix, num_bytes, cudaMemcpyHostToDevice);
@@ -139,6 +140,7 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
     CUDA_ERROR_CHECK(err);
 
     // Get warp size from device properties and set it as block size
+    cudaDeviceProp dev_prop;
     err = cudaGetDeviceProperties(&dev_prop, 0);
     CUDA_ERROR_CHECK(err);
     int warp_size = dev_prop.warpSize;
@@ -149,7 +151,7 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
     // Run FW triple-loop by launching a new kernel for each k
     unsigned int k;
     for (k = 0; k < N; k++) {
-        FW_kernel<<dimGrid, dimBlock>>(adj_matrix_d, go_to_d, N, (int) k);
+        FW_kernel<<<dimGrid, dimBlock>>>(adj_matrix_d, go_to_d, N, (int) k);
         err = cudaGetLastError();
         CUDA_ERROR_CHECK(err);
     }
