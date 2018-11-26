@@ -13,7 +13,7 @@
 #define FW_H
 
 #include <ctype.h>
-#include <cuda.h>
+//#include <cuda.h>
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
@@ -25,7 +25,7 @@
 #define MAX_GRAPH 397020 // max graph size
 #define MAX_BUF 1000 // integer size of buffer for file reading
 #define index(i, j, N)  ((i)*(N)) + (j) // To index element (i,j) of a 2D array stored as 1D
-// For error checking cuda API calls
+// Macro for error checking cuda API calls
 #define CUDA_ERROR_CHECK(err) {\
     if (err != cudaSuccess) {\
         fprintf(stderr, "%s in %s at line %d\n", cudaGetErrorString(err), __FILE__, __LINE__);\

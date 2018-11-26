@@ -9,7 +9,6 @@
  * Program Description: This program implements sequential (CPU) and parallel (GPU) versions of the algorithm.
  */
 
-
 #include "FW_helper.h"
 
 /*****************************************************************/

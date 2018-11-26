@@ -9,6 +9,8 @@
  * File Description: This file implements the functions defined in FW_helper.h
  */
 
+#include "FW_helper.h"
+
 /*******************************************************************************************************************
  * Convert command line input to integer
  * Code taken from https://stackoverflow.com/questions/34206446/how-to-convert-string-into-unsigned-int-c
