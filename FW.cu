@@ -50,13 +50,13 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N);
 *****************************************************************/
 int main(int argc, char *argv[]) {
     // Check that correct number of command line arguments given
-    if (argc != 4) {
+    if (argc != 5) {
         fprintf(stderr, "usage: FW_seq <input> <N>\n");
         fprintf(stderr, "input = file containing adjacency matrix for the graph\n");
         fprintf(stderr, "N = number for vertices from input graph to use\n");
         fprintf(stderr, "who = 0: sequential code on CPU, 1: GPU execution\n");
-        fprintf(stderr, "(optional) -v; verbose = false: if flag is set then original adjacency matrix and APSP "
-                        "solution will be printed.")
+        fprintf(stderr, "verbose = false: if flag is set (i.e. 1 is passed) then original adjacency matrix and APSP "
+                        "solution will be printed.\n");
         exit(1);
     }
 
@@ -71,14 +71,9 @@ int main(int argc, char *argv[]) {
     int type_of_device = 0; // CPU or GPU
     type_of_device = atoi(argv[3]);
     int c;
-    bool verbose = false;
-    while ((c = getopt(argc, argv, "v:")) != -1) {
-        switch(c) {
-            case 'v':
-                verbose = true; // set verbose printing to true
-                break;
-        }
-    }
+    int verbose = 0;
+    verbose = atoi(argv[4]);
+
     // Allocate memory for NxN adjacency matrix
     int *adj_matrix;
     adj_matrix = (int *) calloc( N * N, sizeof(int));
