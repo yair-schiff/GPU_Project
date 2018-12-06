@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
     read_input(input_file_name, adj_matrix, N);
 
     // Pre-process adjacency matrix and next index matrix
-    printf("Preprocessing adjacency and next index matrices...\n");
+    printf("Pre-processing adjacency and next index matrices...\n");
     preprocess_graph(adj_matrix, go_to, N);
     if (verbose) print_adj(adj_matrix, N);
 
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Save solution path between every pair of vertices to file solution_path_<N>.txt
-    const char *outfile_name = concat(concat("solution_path_", argv[2]), ".txt");
+    const char *outfile_name = concat(concat("../outputs/solution_path_", argv[2]), ".txt");
     printf("Saving solution path to file %s...\n", outfile_name);
     save_path(outfile_name, adj_matrix, go_to, N);
 

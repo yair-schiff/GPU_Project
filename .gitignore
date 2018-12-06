@@ -1,14 +1,7 @@
-# Ignore all
-*
-
-# Unignore all with extensions
-!*.*
-!Makefile
-!src/
-
-# Ignore specific files
+# Ignore 
 .DS_Store
 .idea/
-main.cpp
-cmake-build-debug/
-*.txt
+inputs/
+outputs/
+src/FW
+
