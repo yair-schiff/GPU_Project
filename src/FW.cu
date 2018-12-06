@@ -53,7 +53,7 @@ void FW_parallel(int *adj_matrix, int *go_to, unsigned int N);
 int main(int argc, char *argv[]) {
     // Check that correct number of command line arguments given
     if (argc != 5) {
-        fprintf(stderr, "usage: FW_seq <input> <N>\n");
+        fprintf(stderr, "usage: FW_seq <input> <N> <CPU/GPU> <verbose>\n");
         fprintf(stderr, "input = file containing adjacency matrix for the graph\n");
         fprintf(stderr, "N = number for vertices from input graph to use\n");
         fprintf(stderr, "who = 0: sequential code on CPU, 1: GPU execution\n");
@@ -342,7 +342,7 @@ void print_adj(int *adj_matrix, unsigned int N) {
     printf("    |");
     for (i = 0; i < N; i++) printf(" %2d |", i+1);
     printf("\n");
-    for (i = 0; i < N; i++) printf("----|");
+    for (i = 0; i <= N; i++) printf("----|");
     printf("\n");
     for (i = 0; i < N; i++) {
         printf(" %2d |", i+1);
@@ -351,7 +351,7 @@ void print_adj(int *adj_matrix, unsigned int N) {
             else printf("  - |");
         }
         printf("\n");
-        for (j = 0; j < N; j++) printf("----|");
+        for (j = 0; j <= N; j++) printf("----|");
         printf("\n");
     }
 }
