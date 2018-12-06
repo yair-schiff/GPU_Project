@@ -10,6 +10,7 @@
 
 #include <ctype.h>
 #include <cuda.h>
+#include <cuda_profiler_api.h>
 #include <getopt.h>
 #include <limits.h>
 #include <math.h>
@@ -116,7 +117,9 @@ int main(int argc, char *argv[]) {
     else { // The GPU version
         printf("Running FW algorithm on graph (in parallel)...\n");
         clock_start = clock();
+        cudaProfilerStart();
         FW_parallel(adj_matrix, go_to, N);
+        cudaProfilerStop();
         clock_end = clock();
         time_taken = ((double) clock_end - clock_start) / CLOCKS_PER_SEC;
         printf("Time taken to run FW algorithm in parallel: %lf seconds\n", time_taken);
