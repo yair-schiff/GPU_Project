@@ -341,18 +341,18 @@ void print_adj(int *adj_matrix, unsigned int N) {
     printf("Original adjacency matrix:\n");
     printf("    |");
     for (i = 0; i < N; i++) printf(" %2d |", i+1);
-    printf("\n")
+    printf("\n");
     for (i = 0; i < N; i++) printf("----|");
-    printf("\n")
+    printf("\n");
     for (i = 0; i < N; i++) {
         printf(" %2d |", i+1);
         for (j = 0; j < N; j++) {
             if (adj_matrix[index(i, j, N)] != INT_MAX/2) printf(" %2d |", adj_matrix[index(i, j, N)]);
             else printf("  - |");
         }
-        printf("\n")
-        for (i = 0; i < N; i++) printf("----|");
-        printf("\n")
+        printf("\n");
+        for (j = 0; j < N; j++) printf("----|");
+        printf("\n");
     }
 }
 
