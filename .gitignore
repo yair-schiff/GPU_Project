@@ -1,7 +1,6 @@
 # Ignore 
 .DS_Store
 .idea/
-inputs/
-outputs/
 src/FW
-
+src/FW_acc
+src/FW_multi

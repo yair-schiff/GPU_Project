@@ -1,0 +1,897 @@
+[yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Reading in graph input .txt file...
+Pre-processing adjacency and next index matrices...
+==15933== NVPROF is profiling process 15933, command: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Running FW algorithm on graph (in parallel)...
+Time taken to run FW algorithm in parallel: 0.040000 seconds
+==15933== Profiling application: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+==15933== Profiling result:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 94.42%  6.2832ms       500  12.566us  11.328us  23.584us  FW_kernel_plain(int*, int*, unsigned int, int)
+  2.96%  196.83us         2  98.417us  91.617us  105.22us  [CUDA memcpy HtoD]
+  2.62%  174.27us         2  87.137us  83.585us  90.689us  [CUDA memcpy DtoH]
+
+==15933== API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 58.10%  7.6844ms       500  15.368us  9.3080us  2.1957ms  cudaLaunch
+ 18.45%  2.4399ms         2  1.2199ms  490.51us  1.9493ms  cudaMalloc
+  8.74%  1.1564ms         4  289.10us  184.28us  474.31us  cudaMemcpy
+  5.13%  678.69us         1  678.69us  678.69us  678.69us  cudaGetDeviceProperties
+  3.80%  502.51us         2  251.26us  193.21us  309.30us  cudaFree
+  3.76%  497.46us      2000     248ns     162ns  4.7990us  cudaSetupArgument
+  1.10%  145.49us       500     290ns     196ns  5.2470us  cudaGetLastError
+  0.92%  121.81us       500     243ns     174ns  1.2300us  cudaConfigureCall
+[yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Reading in graph input .txt file...
+Pre-processing adjacency and next index matrices...
+==15949== NVPROF is profiling process 15949, command: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Running FW algorithm on graph (in parallel)...
+Time taken to run FW algorithm in parallel: 0.050000 seconds
+==15949== Profiling application: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+==15949== Profiling result:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 95.14%  6.2831ms       500  12.566us  11.360us  23.616us  FW_kernel_plain(int*, int*, unsigned int, int)
+  2.50%  165.19us         2  82.593us  82.561us  82.625us  [CUDA memcpy HtoD]
+  2.36%  155.71us         2  77.857us  77.473us  78.241us  [CUDA memcpy DtoH]
+
+==15949== API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 61.07%  9.7835ms       500  19.567us  5.6770us  3.2953ms  cudaLaunch
+ 15.01%  2.4040ms         2  1.2020ms  718.62us  1.6853ms  cudaMalloc
+ 11.10%  1.7789ms         4  444.73us  158.36us  1.2150ms  cudaMemcpy
+  5.61%  898.96us         1  898.96us  898.96us  898.96us  cudaGetDeviceProperties
+  3.28%  524.91us      2000     262ns     113ns  45.806us  cudaSetupArgument
+  2.39%  383.61us         2  191.80us  179.26us  204.34us  cudaFree
+  0.78%  124.32us       500     248ns     143ns     596ns  cudaGetLastError
+  0.76%  120.99us       500     241ns     130ns     934ns  cudaConfigureCall
+[yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Reading in graph input .txt file...
+Pre-processing adjacency and next index matrices...
+==15969== NVPROF is profiling process 15969, command: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+Running FW algorithm on graph (in parallel)...
+Time taken to run FW algorithm in parallel: 0.040000 seconds
+==15969== Profiling application: ./FW ../inputs/20181101.as-rel.txt 500 1 0
+==15969== Profiling result:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 95.08%  6.2843ms       500  12.568us  11.328us  23.616us  FW_kernel_plain(int*, int*, unsigned int, int)
+  2.50%  165.35us         2  82.673us  82.625us  82.721us  [CUDA memcpy HtoD]
+  2.42%  159.81us         2  79.905us  78.337us  81.473us  [CUDA memcpy DtoH]
+
+==15969== API calls:
+Time(%)      Time     Calls       Avg       Min       Max  Name
+ 61.10%  6.7857ms       500  13.571us  8.6200us  1.5973ms  cudaLaunch
+ 12.23%  1.3582ms         2  679.08us  675.54us  682.63us  cudaMalloc
+ 10.34%  1.1478ms         4  286.95us  137.69us  642.44us  cudaMemcpy
+  5.71%  633.86us         1  633.86us  633.86us  633.86us  cudaGetDeviceProperties
+  4.54%  504.25us      2000     252ns     130ns     796ns  cudaSetupArgument
+  3.65%  405.36us         2  202.68us  185.13us  220.23us  cudaFree
+  1.22%  135.02us       500     270ns     191ns     705ns  cudaGetLastError
+  1.21%  134.86us       500     269ns     196ns     653ns  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16035== NVPROF is profiling process 16035, command: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.090000 seconds
+  ==16035== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  ==16035== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   85.20%  31.025ms      1000  31.024us  29.184us  41.664us  FW_kernel_plain(int*, int*, unsigned int, int)
+    9.24%  3.3640ms         2  1.6820ms  700.78us  2.6633ms  [CUDA memcpy HtoD]
+    5.56%  2.0234ms         2  1.0117ms  432.90us  1.5905ms  [CUDA memcpy DtoH]
+
+  ==16035== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   61.29%  26.737ms         4  6.6844ms  623.44us  22.429ms  cudaMemcpy
+   26.55%  11.583ms      1000  11.583us  5.3880us  2.3927ms  cudaLaunch
+    6.53%  2.8504ms         2  1.4252ms  435.78us  2.4146ms  cudaMalloc
+    1.89%  826.63us      4000     206ns     118ns  5.1350us  cudaSetupArgument
+    1.58%  688.81us         1  688.81us  688.81us  688.81us  cudaGetDeviceProperties
+    1.16%  503.94us         2  251.97us  206.73us  297.20us  cudaFree
+    0.52%  226.66us      1000     226ns     147ns  9.9310us  cudaGetLastError
+    0.48%  208.62us      1000     208ns     124ns  6.6710us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16050== NVPROF is profiling process 16050, command: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.090000 seconds
+  ==16050== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  ==16050== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   90.90%  31.025ms      1000  31.024us  29.120us  41.473us  FW_kernel_plain(int*, int*, unsigned int, int)
+    5.49%  1.8727ms         2  936.33us  427.24us  1.4454ms  [CUDA memcpy HtoD]
+    3.61%  1.2319ms         2  615.93us  607.40us  624.46us  [CUDA memcpy DtoH]
+
+  ==16050== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   45.94%  18.353ms         4  4.5883ms  503.99us  15.374ms  cudaMemcpy
+   43.21%  17.265ms      1000  17.265us  6.7570us  3.0270ms  cudaLaunch
+    4.91%  1.9613ms      4000     490ns     119ns  1.0241ms  cudaSetupArgument
+    1.84%  736.24us         2  368.12us  350.05us  386.20us  cudaMalloc
+    1.64%  655.77us         1  655.77us  655.77us  655.77us  cudaGetDeviceProperties
+    1.28%  510.81us         2  255.41us  205.88us  304.94us  cudaFree
+    0.59%  236.20us      1000     236ns     144ns  1.1930us  cudaConfigureCall
+    0.59%  234.28us      1000     234ns     147ns  1.6360us  cudaGetLastError
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16066== NVPROF is profiling process 16066, command: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.090000 seconds
+  ==16066== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1000 1 0
+  ==16066== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   93.39%  31.017ms      1000  31.017us  29.120us  41.600us  FW_kernel_plain(int*, int*, unsigned int, int)
+    3.42%  1.1374ms         2  568.70us  553.03us  584.36us  [CUDA memcpy HtoD]
+    3.19%  1.0590ms         2  529.48us  432.04us  626.92us  [CUDA memcpy DtoH]
+
+  ==16066== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   65.37%  24.853ms         4  6.2131ms  541.92us  22.985ms  cudaMemcpy
+   27.51%  10.458ms      1000  10.457us  5.3620us  1.9000ms  cudaLaunch
+    1.83%  696.57us      4000     174ns     111ns  3.6270us  cudaSetupArgument
+    1.72%  655.33us         1  655.33us  655.33us  655.33us  cudaGetDeviceProperties
+    1.50%  571.80us         2  285.90us  257.25us  314.54us  cudaMalloc
+    1.15%  437.31us         2  218.66us  194.03us  243.28us  cudaFree
+    0.47%  179.36us      1000     179ns     125ns     695ns  cudaGetLastError
+    0.44%  167.95us      1000     167ns     123ns  1.1840us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16082== NVPROF is profiling process 16082, command: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.180000 seconds
+  ==16082== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  ==16082== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   93.53%  102.14ms      1500  68.092us  62.017us  81.601us  FW_kernel_plain(int*, int*, unsigned int, int)
+    3.27%  3.5696ms         2  1.7848ms  1.7250ms  1.8446ms  [CUDA memcpy DtoH]
+    3.20%  3.4956ms         2  1.7478ms  1.0354ms  2.4602ms  [CUDA memcpy HtoD]
+
+  ==16082== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   65.22%  79.623ms         4  19.906ms  1.1516ms  73.884ms  cudaMemcpy
+   29.84%  36.426ms      1500  24.284us  7.4520us  9.3186ms  cudaLaunch
+    2.77%  3.3810ms      6000     563ns     122ns  995.87us  cudaSetupArgument
+    0.60%  728.24us         1  728.24us  728.24us  728.24us  cudaGetDeviceProperties
+    0.52%  639.51us         2  319.75us  316.53us  322.98us  cudaMalloc
+    0.46%  557.02us         2  278.51us  222.60us  334.41us  cudaFree
+    0.30%  366.38us      1500     244ns     184ns  1.4500us  cudaConfigureCall
+    0.29%  354.24us      1500     236ns     181ns  1.6860us  cudaGetLastError
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16098== NVPROF is profiling process 16098, command: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.180000 seconds
+  ==16098== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  ==16098== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   95.48%  102.15ms      1500  68.097us  62.209us  81.441us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.30%  2.4603ms         2  1.2301ms  1.1820ms  1.2783ms  [CUDA memcpy DtoH]
+    2.22%  2.3777ms         2  1.1889ms  1.1265ms  1.2512ms  [CUDA memcpy HtoD]
+
+  ==16098== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   67.72%  76.285ms         4  19.071ms  1.2364ms  72.289ms  cudaMemcpy
+   28.31%  31.889ms      1500  21.259us  5.7470us  2.1398ms  cudaLaunch
+    1.21%  1.3675ms      6000     227ns     111ns  9.6170us  cudaSetupArgument
+    0.96%  1.0812ms         1  1.0812ms  1.0812ms  1.0812ms  cudaGetDeviceProperties
+    0.58%  653.63us         2  326.82us  320.55us  333.09us  cudaMalloc
+    0.56%  635.37us         2  317.68us  221.96us  413.41us  cudaFree
+    0.34%  379.01us      1500     252ns     147ns  2.5000us  cudaGetLastError
+    0.32%  359.86us      1500     239ns     134ns  5.6300us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16113== NVPROF is profiling process 16113, command: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.190000 seconds
+  ==16113== Profiling application: ./FW ../inputs/20181101.as-rel.txt 1500 1 0
+  ==16113== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   95.67%  93.466ms      1500  62.310us  56.833us  74.113us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.18%  2.1321ms         2  1.0660ms  1.0382ms  1.0938ms  [CUDA memcpy DtoH]
+    2.15%  2.0978ms         2  1.0489ms  1.0360ms  1.0617ms  [CUDA memcpy HtoD]
+
+  ==16113== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   68.60%  70.293ms         4  17.573ms  1.1278ms  66.722ms  cudaMemcpy
+   27.38%  28.053ms      1500  18.702us  5.5970us  2.0206ms  cudaLaunch
+    1.38%  1.4126ms      6000     235ns     121ns  4.7410us  cudaSetupArgument
+    0.68%  695.96us         2  347.98us  336.44us  359.52us  cudaMalloc
+    0.68%  695.23us         1  695.23us  695.23us  695.23us  cudaGetDeviceProperties
+    0.53%  539.01us         2  269.50us  209.98us  329.03us  cudaFree
+    0.40%  413.38us      1500     275ns     141ns  6.6780us  cudaGetLastError
+    0.35%  361.87us      1500     241ns     123ns  1.0860us  cudaConfigureCall
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16178== NVPROF is profiling process 16178, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.320000 seconds
+  ==16178== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  ==16178== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   95.41%  209.10ms      2000  104.55us  102.05us  116.55us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.95%  6.4618ms         2  3.2309ms  3.2257ms  3.2361ms  [CUDA memcpy DtoH]
+    1.65%  3.6064ms         2  1.8032ms  1.7429ms  1.8634ms  [CUDA memcpy HtoD]
+
+  ==16178== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   53.53%  119.50ms         4  29.875ms  1.8068ms  112.21ms  cudaMemcpy
+   44.07%  98.382ms      2000  49.191us  5.7820us  1.9693ms  cudaLaunch
+    0.91%  2.0377ms      8000     254ns     119ns  9.4640us  cudaSetupArgument
+    0.39%  865.14us      2000     432ns     150ns  280.49us  cudaGetLastError
+    0.31%  690.36us         2  345.18us  307.31us  383.04us  cudaMalloc
+    0.29%  650.95us         1  650.95us  650.95us  650.95us  cudaGetDeviceProperties
+    0.26%  571.75us         2  285.87us  224.21us  347.54us  cudaFree
+    0.23%  524.41us      2000     262ns     123ns  4.7850us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16205== NVPROF is profiling process 16205, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.320000 seconds
+  ==16205== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  ==16205== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   95.22%  209.12ms      2000  104.56us  102.43us  116.71us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.77%  6.0883ms         2  3.0442ms  2.8204ms  3.2679ms  [CUDA memcpy HtoD]
+    2.01%  4.4072ms         2  2.2036ms  2.1908ms  2.2164ms  [CUDA memcpy DtoH]
+
+  ==16205== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   53.38%  119.83ms         4  29.956ms  2.4216ms  111.09ms  cudaMemcpy
+   43.78%  98.264ms      2000  49.131us  5.9730us  1.9837ms  cudaLaunch
+    1.38%  3.1061ms      8000     388ns     118ns  993.91us  cudaSetupArgument
+    0.43%  956.10us         2  478.05us  475.67us  480.43us  cudaMalloc
+    0.30%  662.76us         1  662.76us  662.76us  662.76us  cudaGetDeviceProperties
+    0.27%  598.38us         2  299.19us  251.79us  346.60us  cudaFree
+    0.24%  535.09us      2000     267ns     158ns  4.5670us  cudaConfigureCall
+    0.23%  522.17us      2000     261ns     130ns  6.7750us  cudaGetLastError
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16220== NVPROF is profiling process 16220, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.310000 seconds
+  ==16220== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+  ==16220== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   95.65%  209.13ms      2000  104.56us  102.47us  116.90us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.44%  5.3292ms         2  2.6646ms  2.0918ms  3.2375ms  [CUDA memcpy DtoH]
+    1.91%  4.1769ms         2  2.0885ms  1.9958ms  2.1811ms  [CUDA memcpy HtoD]
+
+  ==16220== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   53.41%  119.79ms         4  29.947ms  2.0952ms  112.14ms  cudaMemcpy
+   44.29%  99.328ms      2000  49.664us  5.7450us  2.0479ms  cudaLaunch
+    0.84%  1.8765ms      8000     234ns     113ns  10.306us  cudaSetupArgument
+    0.38%  848.34us         2  424.17us  379.97us  468.37us  cudaMalloc
+    0.32%  721.69us         2  360.85us  360.60us  361.09us  cudaFree
+    0.31%  687.12us         1  687.12us  687.12us  687.12us  cudaGetDeviceProperties
+    0.24%  542.42us      2000     271ns     143ns  5.0570us  cudaGetLastError
+    0.22%  496.14us      2000     248ns     122ns  13.749us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16238== NVPROF is profiling process 16238, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.490000 seconds
+  ==16238== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  ==16238== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   96.98%  419.33ms      2500  167.73us  157.92us  191.14us  FW_kernel_plain(int*, int*, unsigned int, int)
+    1.65%  7.1347ms         2  3.5674ms  3.0412ms  4.0936ms  [CUDA memcpy DtoH]
+    1.37%  5.9455ms         2  2.9728ms  2.7762ms  3.1693ms  [CUDA memcpy HtoD]
+
+  ==16238== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   56.53%  246.16ms      2500  98.462us  5.3140us  3.5644ms  cudaLaunch
+   41.63%  181.27ms         4  45.318ms  2.8426ms  171.94ms  cudaMemcpy
+    0.80%  3.4688ms     10000     346ns     111ns  961.40us  cudaSetupArgument
+    0.38%  1.6527ms         2  826.36us  499.28us  1.1534ms  cudaMalloc
+    0.18%  772.27us         1  772.27us  772.27us  772.27us  cudaGetDeviceProperties
+    0.17%  718.49us      2500     287ns     122ns  66.152us  cudaConfigureCall
+    0.16%  695.01us      2500     278ns     138ns  6.6240us  cudaGetLastError
+    0.16%  675.66us         2  337.83us  299.87us  375.80us  cudaFree
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16254== NVPROF is profiling process 16254, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.570000 seconds
+  ==16254== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  ==16254== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   94.64%  433.28ms      2500  173.31us  158.15us  358.40us  FW_kernel_plain(int*, int*, unsigned int, int)
+    2.86%  13.105ms         2  6.5526ms  5.9011ms  7.2041ms  [CUDA memcpy DtoH]
+    2.50%  11.427ms         2  5.7136ms  4.0872ms  7.3399ms  [CUDA memcpy HtoD]
+
+  ==16254== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   55.83%  259.89ms      2500  103.96us  5.4130us  3.3701ms  cudaLaunch
+   42.77%  199.10ms         4  49.774ms  4.1986ms  181.28ms  cudaMemcpy
+    0.49%  2.2980ms     10000     229ns     110ns  8.9650us  cudaSetupArgument
+    0.35%  1.6257ms         2  812.84us  471.68us  1.1540ms  cudaMalloc
+    0.15%  695.33us         1  695.33us  695.33us  695.33us  cudaGetDeviceProperties
+    0.14%  673.91us      2500     269ns     122ns  6.8280us  cudaGetLastError
+    0.14%  643.77us         2  321.89us  280.54us  363.23us  cudaFree
+    0.13%  619.43us      2500     247ns     133ns  4.8050us  cudaConfigureCall
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16270== NVPROF is profiling process 16270, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.550000 seconds
+  ==16270== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+  ==16270== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   92.82%  419.99ms      2500  167.99us  157.92us  190.79us  FW_kernel_plain(int*, int*, unsigned int, int)
+    5.41%  24.458ms         2  12.229ms  11.100ms  13.358ms  [CUDA memcpy HtoD]
+    1.77%  8.0133ms         2  4.0066ms  3.3366ms  4.6766ms  [CUDA memcpy DtoH]
+
+  ==16270== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   52.96%  242.61ms      2500  97.042us  6.3280us  5.1844ms  cudaLaunch
+   45.04%  206.33ms         4  51.582ms  3.5485ms  178.11ms  cudaMemcpy
+    0.82%  3.7336ms     10000     373ns     111ns  1.0001ms  cudaSetupArgument
+    0.36%  1.6501ms      2500     660ns     123ns  960.93us  cudaConfigureCall
+    0.34%  1.5514ms         1  1.5514ms  1.5514ms  1.5514ms  cudaGetDeviceProperties
+    0.18%  823.69us         2  411.84us  374.06us  449.63us  cudaMalloc
+    0.18%  807.35us      2500     322ns     163ns  19.448us  cudaGetLastError
+    0.13%  587.42us         2  293.71us  254.34us  333.08us  cudaFree
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16288== NVPROF is profiling process 16288, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.660000 seconds
+  ==16288== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  ==16288== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   94.04%  691.68ms      3000  230.56us  226.56us  241.89us  FW_kernel_plain(int*, int*, unsigned int, int)
+    3.17%  23.348ms         2  11.674ms  9.3634ms  13.985ms  [CUDA memcpy DtoH]
+    2.79%  20.503ms         2  10.251ms  8.8702ms  11.633ms  [CUDA memcpy HtoD]
+
+  ==16288== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   60.32%  445.23ms      3000  148.41us  6.4050us  7.4272ms  cudaLaunch
+   38.19%  281.87ms         4  70.468ms  8.9757ms  251.59ms  cudaMemcpy
+    0.46%  3.4027ms      3000  1.1340us     149ns  1.4362ms  cudaGetLastError
+    0.41%  2.9894ms     12000     249ns     119ns  7.1430us  cudaSetupArgument
+    0.30%  2.2023ms         2  1.1011ms  518.86us  1.6834ms  cudaMalloc
+    0.12%  854.53us         2  427.26us  368.10us  486.43us  cudaFree
+    0.11%  827.47us      3000     275ns     147ns  9.7920us  cudaConfigureCall
+    0.10%  705.63us         1  705.63us  705.63us  705.63us  cudaGetDeviceProperties
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16304== NVPROF is profiling process 16304, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.890000 seconds
+  ==16304== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  ==16304== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   90.56%  691.72ms      3000  230.57us  226.82us  242.88us  FW_kernel_plain(int*, int*, unsigned int, int)
+    8.15%  62.260ms         2  31.130ms  15.865ms  46.395ms  [CUDA memcpy DtoH]
+    1.29%  9.8678ms         2  4.9339ms  4.3288ms  5.5390ms  [CUDA memcpy HtoD]
+
+  ==16304== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   58.42%  451.44ms      3000  150.48us  5.6220us  2.0771ms  cudaLaunch
+   40.46%  312.63ms         4  78.159ms  4.4548ms  286.11ms  cudaMemcpy
+    0.39%  3.0490ms     12000     254ns     112ns  10.407us  cudaSetupArgument
+    0.27%  2.1053ms         2  1.0527ms  497.88us  1.6074ms  cudaMalloc
+    0.14%  1.0930ms         2  546.49us  424.68us  668.31us  cudaFree
+    0.11%  862.35us      3000     287ns     124ns  4.1660us  cudaGetLastError
+    0.10%  810.32us      3000     270ns     135ns  3.5350us  cudaConfigureCall
+    0.09%  717.53us         1  717.53us  717.53us  717.53us  cudaGetDeviceProperties
+  [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Reading in graph input .txt file...
+  Pre-processing adjacency and next index matrices...
+  ==16320== NVPROF is profiling process 16320, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  Running FW algorithm on graph (in parallel)...
+  Time taken to run FW algorithm in parallel: 0.830000 seconds
+  ==16320== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+  ==16320== Profiling result:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   94.68%  691.69ms      3000  230.56us  226.63us  241.35us  FW_kernel_plain(int*, int*, unsigned int, int)
+    4.12%  30.108ms         2  15.054ms  14.113ms  15.994ms  [CUDA memcpy DtoH]
+    1.20%  8.7363ms         2  4.3681ms  4.2037ms  4.5326ms  [CUDA memcpy HtoD]
+
+  ==16320== API calls:
+  Time(%)      Time     Calls       Avg       Min       Max  Name
+   60.97%  450.55ms      3000  150.18us  6.2300us  3.5343ms  cudaLaunch
+   37.59%  277.79ms         4  69.447ms  4.2954ms  254.17ms  cudaMemcpy
+    0.53%  3.9048ms     12000     325ns     110ns  953.68us  cudaSetupArgument
+    0.43%  3.1886ms         2  1.5943ms  1.5805ms  1.6081ms  cudaMalloc
+    0.14%  1.0627ms         2  531.36us  393.60us  669.11us  cudaFree
+    0.12%  921.68us      3000     307ns     148ns  9.5370us  cudaGetLastError
+    0.11%  779.88us      3000     259ns     123ns  9.5220us  cudaConfigureCall
+    0.10%  723.97us         1  723.97us  723.97us  723.97us  cudaGetDeviceProperties
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16178== NVPROF is profiling process 16178, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.320000 seconds
+    ==16178== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    ==16178== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     95.41%  209.10ms      2000  104.55us  102.05us  116.55us  FW_kernel_plain(int*, int*, unsigned int, int)
+      2.95%  6.4618ms         2  3.2309ms  3.2257ms  3.2361ms  [CUDA memcpy DtoH]
+      1.65%  3.6064ms         2  1.8032ms  1.7429ms  1.8634ms  [CUDA memcpy HtoD]
+
+    ==16178== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     53.53%  119.50ms         4  29.875ms  1.8068ms  112.21ms  cudaMemcpy
+     44.07%  98.382ms      2000  49.191us  5.7820us  1.9693ms  cudaLaunch
+      0.91%  2.0377ms      8000     254ns     119ns  9.4640us  cudaSetupArgument
+      0.39%  865.14us      2000     432ns     150ns  280.49us  cudaGetLastError
+      0.31%  690.36us         2  345.18us  307.31us  383.04us  cudaMalloc
+      0.29%  650.95us         1  650.95us  650.95us  650.95us  cudaGetDeviceProperties
+      0.26%  571.75us         2  285.87us  224.21us  347.54us  cudaFree
+      0.23%  524.41us      2000     262ns     123ns  4.7850us  cudaConfigureCall
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16205== NVPROF is profiling process 16205, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.320000 seconds
+    ==16205== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    ==16205== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     95.22%  209.12ms      2000  104.56us  102.43us  116.71us  FW_kernel_plain(int*, int*, unsigned int, int)
+      2.77%  6.0883ms         2  3.0442ms  2.8204ms  3.2679ms  [CUDA memcpy HtoD]
+      2.01%  4.4072ms         2  2.2036ms  2.1908ms  2.2164ms  [CUDA memcpy DtoH]
+
+    ==16205== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     53.38%  119.83ms         4  29.956ms  2.4216ms  111.09ms  cudaMemcpy
+     43.78%  98.264ms      2000  49.131us  5.9730us  1.9837ms  cudaLaunch
+      1.38%  3.1061ms      8000     388ns     118ns  993.91us  cudaSetupArgument
+      0.43%  956.10us         2  478.05us  475.67us  480.43us  cudaMalloc
+      0.30%  662.76us         1  662.76us  662.76us  662.76us  cudaGetDeviceProperties
+      0.27%  598.38us         2  299.19us  251.79us  346.60us  cudaFree
+      0.24%  535.09us      2000     267ns     158ns  4.5670us  cudaConfigureCall
+      0.23%  522.17us      2000     261ns     130ns  6.7750us  cudaGetLastError
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16220== NVPROF is profiling process 16220, command: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.310000 seconds
+    ==16220== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2000 1 0
+    ==16220== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     95.65%  209.13ms      2000  104.56us  102.47us  116.90us  FW_kernel_plain(int*, int*, unsigned int, int)
+      2.44%  5.3292ms         2  2.6646ms  2.0918ms  3.2375ms  [CUDA memcpy DtoH]
+      1.91%  4.1769ms         2  2.0885ms  1.9958ms  2.1811ms  [CUDA memcpy HtoD]
+
+    ==16220== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     53.41%  119.79ms         4  29.947ms  2.0952ms  112.14ms  cudaMemcpy
+     44.29%  99.328ms      2000  49.664us  5.7450us  2.0479ms  cudaLaunch
+      0.84%  1.8765ms      8000     234ns     113ns  10.306us  cudaSetupArgument
+      0.38%  848.34us         2  424.17us  379.97us  468.37us  cudaMalloc
+      0.32%  721.69us         2  360.85us  360.60us  361.09us  cudaFree
+      0.31%  687.12us         1  687.12us  687.12us  687.12us  cudaGetDeviceProperties
+      0.24%  542.42us      2000     271ns     143ns  5.0570us  cudaGetLastError
+      0.22%  496.14us      2000     248ns     122ns  13.749us  cudaConfigureCall
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16238== NVPROF is profiling process 16238, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.490000 seconds
+    ==16238== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    ==16238== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     96.98%  419.33ms      2500  167.73us  157.92us  191.14us  FW_kernel_plain(int*, int*, unsigned int, int)
+      1.65%  7.1347ms         2  3.5674ms  3.0412ms  4.0936ms  [CUDA memcpy DtoH]
+      1.37%  5.9455ms         2  2.9728ms  2.7762ms  3.1693ms  [CUDA memcpy HtoD]
+
+    ==16238== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     56.53%  246.16ms      2500  98.462us  5.3140us  3.5644ms  cudaLaunch
+     41.63%  181.27ms         4  45.318ms  2.8426ms  171.94ms  cudaMemcpy
+      0.80%  3.4688ms     10000     346ns     111ns  961.40us  cudaSetupArgument
+      0.38%  1.6527ms         2  826.36us  499.28us  1.1534ms  cudaMalloc
+      0.18%  772.27us         1  772.27us  772.27us  772.27us  cudaGetDeviceProperties
+      0.17%  718.49us      2500     287ns     122ns  66.152us  cudaConfigureCall
+      0.16%  695.01us      2500     278ns     138ns  6.6240us  cudaGetLastError
+      0.16%  675.66us         2  337.83us  299.87us  375.80us  cudaFree
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16254== NVPROF is profiling process 16254, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.570000 seconds
+    ==16254== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    ==16254== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     94.64%  433.28ms      2500  173.31us  158.15us  358.40us  FW_kernel_plain(int*, int*, unsigned int, int)
+      2.86%  13.105ms         2  6.5526ms  5.9011ms  7.2041ms  [CUDA memcpy DtoH]
+      2.50%  11.427ms         2  5.7136ms  4.0872ms  7.3399ms  [CUDA memcpy HtoD]
+
+    ==16254== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     55.83%  259.89ms      2500  103.96us  5.4130us  3.3701ms  cudaLaunch
+     42.77%  199.10ms         4  49.774ms  4.1986ms  181.28ms  cudaMemcpy
+      0.49%  2.2980ms     10000     229ns     110ns  8.9650us  cudaSetupArgument
+      0.35%  1.6257ms         2  812.84us  471.68us  1.1540ms  cudaMalloc
+      0.15%  695.33us         1  695.33us  695.33us  695.33us  cudaGetDeviceProperties
+      0.14%  673.91us      2500     269ns     122ns  6.8280us  cudaGetLastError
+      0.14%  643.77us         2  321.89us  280.54us  363.23us  cudaFree
+      0.13%  619.43us      2500     247ns     133ns  4.8050us  cudaConfigureCall
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16270== NVPROF is profiling process 16270, command: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.550000 seconds
+    ==16270== Profiling application: ./FW ../inputs/20181101.as-rel.txt 2500 1 0
+    ==16270== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     92.82%  419.99ms      2500  167.99us  157.92us  190.79us  FW_kernel_plain(int*, int*, unsigned int, int)
+      5.41%  24.458ms         2  12.229ms  11.100ms  13.358ms  [CUDA memcpy HtoD]
+      1.77%  8.0133ms         2  4.0066ms  3.3366ms  4.6766ms  [CUDA memcpy DtoH]
+
+    ==16270== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     52.96%  242.61ms      2500  97.042us  6.3280us  5.1844ms  cudaLaunch
+     45.04%  206.33ms         4  51.582ms  3.5485ms  178.11ms  cudaMemcpy
+      0.82%  3.7336ms     10000     373ns     111ns  1.0001ms  cudaSetupArgument
+      0.36%  1.6501ms      2500     660ns     123ns  960.93us  cudaConfigureCall
+      0.34%  1.5514ms         1  1.5514ms  1.5514ms  1.5514ms  cudaGetDeviceProperties
+      0.18%  823.69us         2  411.84us  374.06us  449.63us  cudaMalloc
+      0.18%  807.35us      2500     322ns     163ns  19.448us  cudaGetLastError
+      0.13%  587.42us         2  293.71us  254.34us  333.08us  cudaFree
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16288== NVPROF is profiling process 16288, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.660000 seconds
+    ==16288== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    ==16288== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     94.04%  691.68ms      3000  230.56us  226.56us  241.89us  FW_kernel_plain(int*, int*, unsigned int, int)
+      3.17%  23.348ms         2  11.674ms  9.3634ms  13.985ms  [CUDA memcpy DtoH]
+      2.79%  20.503ms         2  10.251ms  8.8702ms  11.633ms  [CUDA memcpy HtoD]
+
+    ==16288== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     60.32%  445.23ms      3000  148.41us  6.4050us  7.4272ms  cudaLaunch
+     38.19%  281.87ms         4  70.468ms  8.9757ms  251.59ms  cudaMemcpy
+      0.46%  3.4027ms      3000  1.1340us     149ns  1.4362ms  cudaGetLastError
+      0.41%  2.9894ms     12000     249ns     119ns  7.1430us  cudaSetupArgument
+      0.30%  2.2023ms         2  1.1011ms  518.86us  1.6834ms  cudaMalloc
+      0.12%  854.53us         2  427.26us  368.10us  486.43us  cudaFree
+      0.11%  827.47us      3000     275ns     147ns  9.7920us  cudaConfigureCall
+      0.10%  705.63us         1  705.63us  705.63us  705.63us  cudaGetDeviceProperties
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16304== NVPROF is profiling process 16304, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.890000 seconds
+    ==16304== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    ==16304== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     90.56%  691.72ms      3000  230.57us  226.82us  242.88us  FW_kernel_plain(int*, int*, unsigned int, int)
+      8.15%  62.260ms         2  31.130ms  15.865ms  46.395ms  [CUDA memcpy DtoH]
+      1.29%  9.8678ms         2  4.9339ms  4.3288ms  5.5390ms  [CUDA memcpy HtoD]
+
+    ==16304== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     58.42%  451.44ms      3000  150.48us  5.6220us  2.0771ms  cudaLaunch
+     40.46%  312.63ms         4  78.159ms  4.4548ms  286.11ms  cudaMemcpy
+      0.39%  3.0490ms     12000     254ns     112ns  10.407us  cudaSetupArgument
+      0.27%  2.1053ms         2  1.0527ms  497.88us  1.6074ms  cudaMalloc
+      0.14%  1.0930ms         2  546.49us  424.68us  668.31us  cudaFree
+      0.11%  862.35us      3000     287ns     124ns  4.1660us  cudaGetLastError
+      0.10%  810.32us      3000     270ns     135ns  3.5350us  cudaConfigureCall
+      0.09%  717.53us         1  717.53us  717.53us  717.53us  cudaGetDeviceProperties
+    [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Reading in graph input .txt file...
+    Pre-processing adjacency and next index matrices...
+    ==16320== NVPROF is profiling process 16320, command: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    Running FW algorithm on graph (in parallel)...
+    Time taken to run FW algorithm in parallel: 0.830000 seconds
+    ==16320== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3000 1 0
+    ==16320== Profiling result:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     94.68%  691.69ms      3000  230.56us  226.63us  241.35us  FW_kernel_plain(int*, int*, unsigned int, int)
+      4.12%  30.108ms         2  15.054ms  14.113ms  15.994ms  [CUDA memcpy DtoH]
+      1.20%  8.7363ms         2  4.3681ms  4.2037ms  4.5326ms  [CUDA memcpy HtoD]
+
+    ==16320== API calls:
+    Time(%)      Time     Calls       Avg       Min       Max  Name
+     60.97%  450.55ms      3000  150.18us  6.2300us  3.5343ms  cudaLaunch
+     37.59%  277.79ms         4  69.447ms  4.2954ms  254.17ms  cudaMemcpy
+      0.53%  3.9048ms     12000     325ns     110ns  953.68us  cudaSetupArgument
+      0.43%  3.1886ms         2  1.5943ms  1.5805ms  1.6081ms  cudaMalloc
+      0.14%  1.0627ms         2  531.36us  393.60us  669.11us  cudaFree
+      0.12%  921.68us      3000     307ns     148ns  9.5370us  cudaGetLastError
+      0.11%  779.88us      3000     259ns     123ns  9.5220us  cudaConfigureCall
+      0.10%  723.97us         1  723.97us  723.97us  723.97us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16418== NVPROF is profiling process 16418, command: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.300000 seconds
+      ==16418== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      ==16418== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       93.92%  1.17760s      3500  336.46us  314.88us  648.55us  FW_kernel_plain(int*, int*, unsigned int, int)
+        4.51%  56.496ms         2  28.248ms  18.176ms  38.320ms  [CUDA memcpy DtoH]
+        1.57%  19.670ms         2  9.8350ms  7.5696ms  12.100ms  [CUDA memcpy HtoD]
+
+      ==16418== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       65.49%  826.88ms      3500  236.25us  6.0810us  3.4877ms  cudaLaunch
+       33.32%  420.79ms         4  105.20ms  8.2353ms  381.53ms  cudaMemcpy
+        0.46%  5.8675ms     14000     419ns     109ns  1.7201ms  cudaSetupArgument
+        0.22%  2.8035ms         2  1.4018ms  562.42us  2.2411ms  cudaMalloc
+        0.19%  2.4082ms      3500     688ns     128ns  1.0648ms  cudaGetLastError
+        0.17%  2.2038ms      3500     629ns     145ns  985.52us  cudaConfigureCall
+        0.08%  1.0363ms         2  518.17us  458.73us  577.60us  cudaFree
+        0.06%  712.66us         1  712.66us  712.66us  712.66us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16438== NVPROF is profiling process 16438, command: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.360000 seconds
+      ==16438== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      ==16438== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       86.82%  1.18248s      3500  337.85us  314.79us  627.11us  FW_kernel_plain(int*, int*, unsigned int, int)
+       12.28%  167.20ms         2  83.600ms  72.778ms  94.421ms  [CUDA memcpy DtoH]
+        0.91%  12.353ms         2  6.1764ms  6.1187ms  6.2341ms  [CUDA memcpy HtoD]
+
+      ==16438== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       60.19%  823.57ms      3500  235.31us  6.5860us  3.5330ms  cudaLaunch
+       38.51%  526.88ms         4  131.72ms  6.2109ms  440.02ms  cudaMemcpy
+        0.67%  9.1083ms     14000     650ns     116ns  2.5226ms  cudaSetupArgument
+        0.22%  3.0309ms         2  1.5154ms  574.78us  2.4561ms  cudaMalloc
+        0.19%  2.5911ms      3500     740ns     146ns  1.3599ms  cudaGetLastError
+        0.09%  1.1884ms         2  594.18us  449.80us  738.56us  cudaFree
+        0.08%  1.1075ms      3500     316ns     134ns  10.647us  cudaConfigureCall
+        0.05%  737.70us         1  737.70us  737.70us  737.70us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16455== NVPROF is profiling process 16455, command: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.210000 seconds
+      ==16455== Profiling application: ./FW ../inputs/20181101.as-rel.txt 3500 1 0
+      ==16455== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       89.17%  1.16547s      3500  332.99us  314.76us  656.39us  FW_kernel_plain(int*, int*, unsigned int, int)
+        9.76%  127.53ms         2  63.766ms  51.463ms  76.069ms  [CUDA memcpy DtoH]
+        1.07%  14.008ms         2  7.0042ms  6.9935ms  7.0149ms  [CUDA memcpy HtoD]
+
+      ==16455== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       62.21%  818.88ms      3500  233.97us  5.5500us  7.1392ms  cudaLaunch
+       37.02%  487.29ms         4  121.82ms  7.1312ms  418.69ms  cudaMemcpy
+        0.28%  3.7125ms     14000     265ns     104ns  19.257us  cudaSetupArgument
+        0.16%  2.1567ms         2  1.0783ms  577.29us  1.5794ms  cudaMalloc
+        0.10%  1.2936ms      3500     369ns     134ns  20.680us  cudaGetLastError
+        0.08%  1.0916ms         2  545.79us  502.18us  589.40us  cudaFree
+        0.08%  1.0366ms      3500     296ns     122ns  26.004us  cudaConfigureCall
+        0.06%  762.84us         1  762.84us  762.84us  762.84us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16474== NVPROF is profiling process 16474, command: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.840000 seconds
+      ==16474== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      ==16474== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       94.95%  1.64148s      4000  410.37us  405.16us  643.40us  FW_kernel_plain(int*, int*, unsigned int, int)
+        3.79%  65.573ms         2  32.786ms  26.377ms  39.196ms  [CUDA memcpy DtoH]
+        1.26%  21.798ms         2  10.899ms  9.2863ms  12.512ms  [CUDA memcpy HtoD]
+
+      ==16474== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       69.78%  1.21223s      4000  303.06us  5.3890us  3.7261ms  cudaLaunch
+       29.45%  511.54ms         4  127.88ms  11.049ms  460.92ms  cudaMemcpy
+        0.28%  4.7784ms     16000     298ns     134ns  273.45us  cudaSetupArgument
+        0.13%  2.2410ms         2  1.1205ms  656.52us  1.5845ms  cudaMalloc
+        0.13%  2.1760ms         1  2.1760ms  2.1760ms  2.1760ms  cudaGetDeviceProperties
+        0.09%  1.4980ms      4000     374ns     153ns  4.6680us  cudaGetLastError
+        0.08%  1.4575ms         2  728.75us  593.89us  863.60us  cudaFree
+        0.07%  1.2394ms      4000     309ns     138ns  8.2790us  cudaConfigureCall
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16499== NVPROF is profiling process 16499, command: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.640000 seconds
+      ==16499== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      ==16499== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       92.22%  1.64306s      4000  410.77us  405.03us  460.49us  FW_kernel_plain(int*, int*, unsigned int, int)
+        6.26%  111.52ms         2  55.762ms  39.401ms  72.122ms  [CUDA memcpy DtoH]
+        1.53%  27.188ms         2  13.594ms  11.787ms  15.401ms  [CUDA memcpy HtoD]
+
+      ==16499== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       67.63%  1.20680s      4000  301.70us  5.5590us  4.4347ms  cudaLaunch
+       31.53%  562.64ms         4  140.66ms  11.895ms  461.02ms  cudaMemcpy
+        0.37%  6.5770ms     16000     411ns     113ns  1.4247ms  cudaSetupArgument
+        0.17%  3.0828ms      4000     770ns     131ns  988.30us  cudaGetLastError
+        0.12%  2.2057ms         2  1.1029ms  643.32us  1.5624ms  cudaMalloc
+        0.07%  1.2668ms      4000     316ns     125ns  93.095us  cudaConfigureCall
+        0.06%  1.1247ms         2  562.35us  497.87us  626.82us  cudaFree
+        0.04%  740.14us         1  740.14us  740.14us  740.14us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16515== NVPROF is profiling process 16515, command: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 1.650000 seconds
+      ==16515== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4000 1 0
+      ==16515== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       92.90%  1.64316s      4000  410.79us  405.57us  460.23us  FW_kernel_plain(int*, int*, unsigned int, int)
+        6.10%  107.91ms         2  53.955ms  42.849ms  65.061ms  [CUDA memcpy DtoH]
+        1.00%  17.622ms         2  8.8112ms  8.6523ms  8.9701ms  [CUDA memcpy HtoD]
+
+      ==16515== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       68.29%  1.21262s      4000  303.15us  5.7350us  5.5963ms  cudaLaunch
+       31.02%  550.81ms         4  137.70ms  9.1214ms  464.58ms  cudaMemcpy
+        0.33%  5.8083ms     16000     363ns     111ns  1.0211ms  cudaSetupArgument
+        0.12%  2.1715ms         2  1.0857ms  597.23us  1.5743ms  cudaMalloc
+        0.07%  1.3042ms      4000     326ns     127ns  14.732us  cudaGetLastError
+        0.07%  1.2715ms         2  635.75us  507.57us  763.93us  cudaFree
+        0.07%  1.1966ms      4000     299ns     136ns  16.049us  cudaConfigureCall
+        0.03%  598.10us         1  598.10us  598.10us  598.10us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16535== NVPROF is profiling process 16535, command: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 2.890000 seconds
+      ==16535== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      ==16535== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       91.54%  2.47577s      4500  550.17us  515.59us  643.75us  FW_kernel_plain(int*, int*, unsigned int, int)
+        7.57%  204.70ms         2  102.35ms  93.967ms  110.73ms  [CUDA memcpy DtoH]
+        0.89%  24.198ms         2  12.099ms  11.936ms  12.262ms  [CUDA memcpy HtoD]
+
+      ==16535== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       70.08%  1.90265s      4500  422.81us  7.7940us  5.1729ms  cudaLaunch
+       29.36%  797.24ms         4  199.31ms  12.356ms  675.22ms  cudaMemcpy
+        0.25%  6.7357ms     18000     374ns     117ns  1.2263ms  cudaSetupArgument
+        0.12%  3.3922ms         2  1.6961ms  742.28us  2.6499ms  cudaMalloc
+        0.06%  1.6217ms      4500     360ns     147ns  12.956us  cudaGetLastError
+        0.06%  1.6061ms      4500     356ns     184ns  16.114us  cudaConfigureCall
+        0.04%  1.0403ms         2  520.13us  490.37us  549.90us  cudaFree
+        0.03%  772.47us         1  772.47us  772.47us  772.47us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16553== NVPROF is profiling process 16553, command: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 2.560000 seconds
+      ==16553== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      ==16553== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       86.96%  2.47593s      4500  550.21us  515.30us  640.81us  FW_kernel_plain(int*, int*, unsigned int, int)
+       12.24%  348.37ms         2  174.18ms  164.87ms  183.50ms  [CUDA memcpy DtoH]
+        0.80%  22.863ms         2  11.432ms  11.161ms  11.702ms  [CUDA memcpy HtoD]
+
+      ==16553== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       66.59%  1.90270s      4500  422.82us  5.6100us  7.6169ms  cudaLaunch
+       32.95%  941.49ms         4  235.37ms  11.335ms  730.99ms  cudaMemcpy
+        0.19%  5.5155ms     18000     306ns     110ns  26.627us  cudaSetupArgument
+        0.08%  2.2721ms         2  1.1361ms  681.20us  1.5909ms  cudaMalloc
+        0.06%  1.8482ms      4500     410ns     133ns  21.303us  cudaGetLastError
+        0.06%  1.6325ms      4500     362ns     141ns  28.304us  cudaConfigureCall
+        0.04%  1.2615ms         2  630.75us  522.36us  739.14us  cudaFree
+        0.02%  638.70us         1  638.70us  638.70us  638.70us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16571== NVPROF is profiling process 16571, command: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 2.430000 seconds
+      ==16571== Profiling application: ./FW ../inputs/20181101.as-rel.txt 4500 1 0
+      ==16571== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       90.74%  2.50206s      4500  556.01us  516.10us  898.15us  FW_kernel_plain(int*, int*, unsigned int, int)
+        8.49%  233.98ms         2  116.99ms  78.261ms  155.72ms  [CUDA memcpy DtoH]
+        0.77%  21.349ms         2  10.675ms  9.5458ms  11.803ms  [CUDA memcpy HtoD]
+
+      ==16571== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       69.32%  1.92023s      4500  426.72us  5.5660us  3.4292ms  cudaLaunch
+       30.10%  833.80ms         4  208.45ms  9.6604ms  651.53ms  cudaMemcpy
+        0.22%  6.1372ms     18000     340ns     113ns  142.32us  cudaSetupArgument
+        0.12%  3.2674ms         2  1.6337ms  695.36us  2.5721ms  cudaMalloc
+        0.11%  3.0985ms      4500     688ns     124ns  1.3489ms  cudaGetLastError
+        0.06%  1.5274ms      4500     339ns     122ns  20.083us  cudaConfigureCall
+        0.05%  1.2575ms         2  628.77us  533.53us  724.01us  cudaFree
+        0.03%  735.11us         1  735.11us  735.11us  735.11us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16592== NVPROF is profiling process 16592, command: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 3.620000 seconds
+      ==16592== Profiling application: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      ==16592== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       91.46%  3.30008s      5000  660.02us  647.30us  1.0138ms  FW_kernel_plain(int*, int*, unsigned int, int)
+        7.87%  283.97ms         2  141.98ms  141.32ms  142.64ms  [CUDA memcpy DtoH]
+        0.67%  24.264ms         2  12.132ms  12.058ms  12.206ms  [CUDA memcpy HtoD]
+
+      ==16592== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       72.15%  2.61145s      5000  522.29us  6.1640us  5.1647ms  cudaLaunch
+       27.39%  991.23ms         4  247.81ms  12.279ms  821.15ms  cudaMemcpy
+        0.16%  5.8900ms     20000     294ns     112ns  10.848us  cudaSetupArgument
+        0.14%  5.1116ms         2  2.5558ms  535.65us  4.5760ms  cudaMalloc
+        0.05%  1.8938ms      5000     378ns     147ns  26.700us  cudaGetLastError
+        0.05%  1.7745ms      5000     354ns     159ns  29.975us  cudaConfigureCall
+        0.04%  1.4109ms         2  705.46us  596.38us  814.54us  cudaFree
+        0.02%  720.92us         1  720.92us  720.92us  720.92us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16612== NVPROF is profiling process 16612, command: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 3.350000 seconds
+      ==16612== Profiling application: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      ==16612== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       96.67%  3.29753s      5000  659.51us  646.34us  997.55us  FW_kernel_plain(int*, int*, unsigned int, int)
+        2.52%  85.994ms         2  42.997ms  40.765ms  45.229ms  [CUDA memcpy DtoH]
+        0.81%  27.491ms         2  13.745ms  12.961ms  14.530ms  [CUDA memcpy HtoD]
+
+      ==16612== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       76.32%  2.60937s      5000  521.87us  5.2100us  4.4723ms  cudaLaunch
+       23.21%  793.54ms         4  198.39ms  13.071ms  723.72ms  cudaMemcpy
+        0.16%  5.3772ms     20000     268ns     111ns  19.079us  cudaSetupArgument
+        0.15%  5.1153ms         2  2.5576ms  529.55us  4.5857ms  cudaMalloc
+        0.05%  1.8567ms      5000     371ns     130ns  13.812us  cudaGetLastError
+        0.04%  1.5028ms      5000     300ns     122ns  21.041us  cudaConfigureCall
+        0.04%  1.3396ms         2  669.81us  580.17us  759.45us  cudaFree
+        0.02%  733.15us         1  733.15us  733.15us  733.15us  cudaGetDeviceProperties
+      [yzs208@cuda2 src]$ nvprof --profile-from-start-off ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Reading in graph input .txt file...
+      Pre-processing adjacency and next index matrices...
+      ==16630== NVPROF is profiling process 16630, command: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      Running FW algorithm on graph (in parallel)...
+      Time taken to run FW algorithm in parallel: 3.760000 seconds
+      ==16630== Profiling application: ./FW ../inputs/20181101.as-rel.txt 5000 1 0
+      ==16630== Profiling result:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       91.61%  3.29584s      5000  659.17us  646.44us  962.31us  FW_kernel_plain(int*, int*, unsigned int, int)
+        7.15%  257.28ms         2  128.64ms  101.49ms  155.79ms  [CUDA memcpy DtoH]
+        1.24%  44.577ms         2  22.288ms  18.328ms  26.249ms  [CUDA memcpy HtoD]
+
+      ==16630== API calls:
+      Time(%)      Time     Calls       Avg       Min       Max  Name
+       72.23%  2.60789s      5000  521.58us  6.2290us  4.5485ms  cudaLaunch
+       27.30%  985.55ms         4  246.39ms  20.302ms  780.69ms  cudaMemcpy
+        0.15%  5.3472ms     20000     267ns     112ns  16.914us  cudaSetupArgument
+        0.12%  4.3496ms         2  2.1748ms  694.57us  3.6550ms  cudaMalloc
+        0.09%  3.1791ms      5000     635ns     147ns  1.2985ms  cudaGetLastError
+        0.05%  1.8952ms      5000     379ns     122ns  365.72us  cudaConfigureCall
+        0.04%  1.5742ms         2  787.09us  731.94us  842.24us  cudaFree
+        0.02%  702.82us         1  702.82us  702.82us  702.82us  cudaGetDeviceProperties
