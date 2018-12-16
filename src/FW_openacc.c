@@ -5,13 +5,17 @@
  *
  * Project Description: This project explores the efficient implementation of the Floyd-Warshall (FW) algorithm, a
  * solution for the All-Pairs-Shortest-Path (APSP) and Transitive Closure problems. This project will compare sequential
- * (CPU) and parallel (GPU) versions of the algorithm.
+ * (CPU) and parallel (GPU - using OpenACC) versions of the algorithm.
+ *
+ * To compile run:
+ *      module load pgi
+ *      (for GPU)
+ *      pgcc -o FW_acc -acc -Minfo FW_openacc.c 
+ *      (for Multi-core)
+ *      pgcc -o FW_multi -acc -ta=multicore -Minfo FW_openacc.c 
  */
 
 #include <ctype.h>
-#include <cuda.h>
-//#include <cuda_profiler_api.h>
-#include <getopt.h>
 #include <limits.h>
 #include <math.h>
 #include <stdlib.h>
@@ -25,13 +29,6 @@
 #define MAX_GRAPH 397020 // max graph size
 #define MAX_BUF 1000 // integer size of buffer for file reading
 #define index(i, j, N)  ((i)*(N)) + (j) // To index element (i,j) of a 2D array stored as 1D
-// Macro for error checking cuda API calls
-#define CUDA_ERROR_CHECK(err) {\
-    if (err != cudaSuccess) {\
-        fprintf(stderr, "%s in %s at line %d\n", cudaGetErrorString(err), __FILE__, __LINE__);\
-        exit(1);\
-    }\
-}
 
 /*****************************************************************
  * Forward declarations
@@ -40,12 +37,11 @@ char* concat(const char *s1, const char *s2);
 unsigned int convert(char *st);
 void read_input(const char *fn, int *adj_matrix, unsigned int N);
 void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N);
-void preprocess_graph_parallel(int *adj_matrix, int *go_to, unsigned int N);
 void print_adj(int *adj_matrix, unsigned int N);
 void save_path(const char *fn, int *adj_matrix, int *go_to, unsigned int N);
 void save_path_recursive(FILE * f, int *go_to, unsigned int i, unsigned int j, unsigned int N);
 void FW_sequential(int *adj_matrix, int *go_to, unsigned int N);
-void FW_parallel(int *adj_matrix, int *go_to, unsigned int N);
+void FW_openacc(int *adj_matrix, int *go_to, unsigned int N);
 /*****************************************************************/
 
 /*****************************************************************
@@ -98,7 +94,6 @@ int main(int argc, char *argv[]) {
 
     // Pre-process adjacency matrix and next index matrix
     printf("Pre-processing adjacency and next index matrices...\n");
-    //preprocess_graph_parallel(adj_matrix, go_to, N);
     preprocess_graph(adj_matrix, go_to, N);
     if (verbose) print_adj(adj_matrix, N);
 
@@ -115,15 +110,13 @@ int main(int argc, char *argv[]) {
         time_taken = ((double) clock_end - clock_start) / CLOCKS_PER_SEC;
         printf("Time taken to run FW algorithm sequentially: %lf seconds\n", time_taken);
     }
-    else { // The GPU version
+    else { // The parallel version
         printf("Running FW algorithm on graph (in parallel)...\n");
         clock_start = clock();
-        //cudaProfilerStart();
-        FW_parallel(adj_matrix, go_to, N);
-        //cudaProfilerStop();
+        FW_openacc(adj_matrix, go_to, N);
         clock_end = clock();
         time_taken = ((double) clock_end - clock_start) / CLOCKS_PER_SEC;
-        printf("Time taken to run FW algorithm in parallel: %lf seconds\n", time_taken);
+        printf("Time taken to run FW algorithm in parallel (OpenACC): %lf seconds\n", time_taken);
     }
 
     // Save solution path between every pair of vertices to file solution_path_<N>.txt
@@ -141,11 +134,8 @@ int main(int argc, char *argv[]) {
  *******************************************************************************************************************/
 void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
     unsigned int i, j, k;
-    //#pragma parallel
     for (k = 0; k < N; k++) {
-        // #pragma loop --> first try w/no gangs and workers then add
         for (i = 0; i < N; i++) {
-            // #pragma loop --> first try w/no gangs and workers then add
             for (j = 0; j < N; j++) {
                 if (adj_matrix[index(i, j, N)] > (adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)])) {
                     adj_matrix[index(i, j, N)] = adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)];
@@ -157,64 +147,26 @@ void FW_sequential(int *adj_matrix, int *go_to, unsigned int N) {
 }
 
 /*******************************************************************************************************************
- * 'Plain' kernel for running inner double for-loops of FW in parallel
+ * Floyd-Warshall algorithm to solve APSP problem in parallel using OpenACC 
  *******************************************************************************************************************/
-__global__
-void FW_kernel_plain(int *adj_matrix, int *go_to, unsigned int N, int k) {
-    unsigned int i = blockIdx.y * blockDim.y + threadIdx.y;
-    unsigned int j = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < N && j < N) { // Boundary check
-        if (adj_matrix[index(i, j, N)] > (adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)])) {
-            adj_matrix[index(i, j, N)] = adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)];
-            go_to[index(i, j, N)] = k;
+void FW_openacc(int *adj_matrix, int *go_to, unsigned int N) {
+    unsigned int i, j, k;
+    //#pragma acc parallel loop copyin(adj_matrix[0:N*N]) copyin(go_to[0:N*N]) copyout(adj_matrix[0:N*N]) copyout(go_to[0:N*N])
+    #pragma acc parallel copy(adj_matrix[0:N*N]) copy(go_to[0:N*N])
+    {
+        for (k = 0; k < N; k++) {
+            #pragma acc loop // --> first try w/no gangs and workers then add
+            for (i = 0; i < N; i++) {
+                #pragma acc loop //--> first try w/no gangs and workers then add
+                for (j = 0; j < N; j++) {
+                    if (adj_matrix[index(i, j, N)] > (adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)])) {
+                        adj_matrix[index(i, j, N)] = adj_matrix[index(i, k, N)] + adj_matrix[index(k, j, N)];
+                        go_to[index(i, j, N)] = (int) k;
+                    }
+                }
+            }
         }
-    }
-}
-
-/*******************************************************************************************************************
- * Floyd-Warshall algorithm to solve APSP problem on GPU
- *******************************************************************************************************************/
-void FW_parallel(int *adj_matrix, int *go_to, unsigned int N) {
-    // Allocate memory on GPU for NxN adjacency and next index matrices
-    size_t num_bytes = sizeof(int) * N * N; // number of bytes for N x N matrix
-    int *adj_matrix_d;
-    int *go_to_d;
-    cudaError_t err = cudaMalloc((void **) &adj_matrix_d, num_bytes);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(adj_matrix_d, adj_matrix, num_bytes, cudaMemcpyHostToDevice);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMalloc((void **) &go_to_d, num_bytes);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(go_to_d, go_to, num_bytes, cudaMemcpyHostToDevice);
-    CUDA_ERROR_CHECK(err);
-
-
-    // Get warp size from device properties and set it as block size
-    cudaDeviceProp dev_prop;
-    err = cudaGetDeviceProperties(&dev_prop, 0);
-    CUDA_ERROR_CHECK(err);
-    int warp_size = dev_prop.warpSize;
-    int dim_helper = ceil(N/((double) warp_size));
-    dim3 dimGrid(dim_helper, dim_helper);
-    dim3 dimBlock(warp_size, warp_size);
-
-    // Run FW triple-loop by launching a new kernel for each k
-    unsigned int k;
-    for (k = 0; k < N; k++) {
-        FW_kernel_plain<<<dimGrid, dimBlock>>>(adj_matrix_d, go_to_d, N, (int) k);
-        err = cudaGetLastError();
-        CUDA_ERROR_CHECK(err);
-    }
-
-    // Copy solution back to host
-    err = cudaMemcpy(adj_matrix, adj_matrix_d, num_bytes, cudaMemcpyDeviceToHost);
-    CUDA_ERROR_CHECK(err);
-    err = cudaFree(adj_matrix_d);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(go_to, go_to_d, num_bytes, cudaMemcpyDeviceToHost);
-    CUDA_ERROR_CHECK(err);
-    err = cudaFree(go_to_d);
-    CUDA_ERROR_CHECK(err);
+   }
 }
 
 /*******************************************************************************************************************
@@ -285,58 +237,6 @@ void read_input(const char *fn, int *adj_matrix, unsigned int N) {
  * Fill non-edges with int_max/2 in adjacency matrix and -1 in next index on path matrix
  * This will use GPU kernel as task is highly parallel (even though kernel will experience a lot of branch divergence)
  *******************************************************************************************************************/
-__global__
-void preprocess_kernel(int *adj_matrix, int *go_to, unsigned int N) {
-    unsigned int i = blockIdx.y * blockDim.y + threadIdx.y;
-    unsigned int j = blockIdx.x * blockDim.x + threadIdx.x;
-    if (i < N && j < N) { // Boundary check
-        if (adj_matrix[index(i, j, N)] >= 1) {
-            go_to[index(i, j, N)] = j;
-        }
-        else {
-            adj_matrix[index(i, j, N)] = INT_MAX / 2;
-            go_to[index(i, j, N)] = -1;
-        }
-    }
-}
-
-void preprocess_graph_parallel(int *adj_matrix, int *go_to, unsigned int N) {
-    int num_bytes = sizeof(int) * N * N;
-    int *adj_matrix_d;
-    int *go_to_d;
-    cudaError_t err = cudaMalloc((void **) &adj_matrix_d, num_bytes);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(adj_matrix_d, adj_matrix, num_bytes, cudaMemcpyHostToDevice);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMalloc((void **) &go_to_d, num_bytes);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(go_to_d, go_to, num_bytes, cudaMemcpyHostToDevice);
-    CUDA_ERROR_CHECK(err);
-
-    // Get warp size from device properties and set it as block size
-    cudaDeviceProp dev_prop;
-    err = cudaGetDeviceProperties(&dev_prop, 0);
-    CUDA_ERROR_CHECK(err);
-    int warp_size = dev_prop.warpSize;
-    int dim_helper = ceil(N/((double) warp_size));
-    dim3 dimGrid(dim_helper, dim_helper);
-    dim3 dimBlock(warp_size, warp_size);
-
-    // Run pre-processing kernel
-    preprocess_kernel<<<dimGrid, dimBlock>>>(adj_matrix_d, go_to_d, N);
-    err = cudaGetLastError();
-    CUDA_ERROR_CHECK(err);
-
-    // Copy solution back to host
-    err = cudaMemcpy(adj_matrix, adj_matrix_d, num_bytes, cudaMemcpyDeviceToHost);
-    CUDA_ERROR_CHECK(err);
-    err = cudaFree(adj_matrix_d);
-    CUDA_ERROR_CHECK(err);
-    err = cudaMemcpy(go_to, go_to_d, num_bytes, cudaMemcpyDeviceToHost);
-    CUDA_ERROR_CHECK(err);
-    err = cudaFree(go_to_d);
-    CUDA_ERROR_CHECK(err);
-}
 
 // Sequential preprocessing
 void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
@@ -353,6 +253,7 @@ void preprocess_graph(int *adj_matrix, int *go_to, unsigned int N) {
         }
     }
 }
+
 /*******************************************************************************************************************
  * Print adjacency matrix read in from file
  *******************************************************************************************************************/
