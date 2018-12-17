@@ -5,18 +5,18 @@ ____
 **Instructor:** Prof. Zahran
 ____
 
-##Overview
+## Overview
 This project compares an efficient GPU implementation of the Floyd-Warshall (FW)
 algorithm for solving the all-pair-shortest-path (APSP) problem with that of a
 CPU implementation and other GPU implementations.
 
 
-##Requirements
+## Requirements
 1) CUDA compiler - `module load cuda-9.1`
 2) OpenACC compiler - `module load module load pgi`
 
 
-##How to use
+## How to use
 ### Compilation
 To compile the CUDA version of the parallel FW algorithm use the `Makefile` provided in the `src` directory.
 
@@ -44,7 +44,7 @@ pgcc -o FW_multi -acc -ta=multicore -Minfo FW_openacc.c
 The GPU binary file, `FW_acc`, and that from the multi-core compilations, `FW_multi`, will have the same usage as the CUDA code, as described below.
 
 
-###Usage
+### Usage
 To run the algorithm on a CPU, GPU, or Multi-Core processor use the following command line from within the `/src` directory where the code was compiled (shown for the CUDA binary file):
 ```bash
 ./FW <path to input file> <N> <machine> <verbose>
